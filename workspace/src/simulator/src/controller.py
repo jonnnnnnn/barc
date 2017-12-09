@@ -64,12 +64,12 @@ class PID():
     def acc_calculate(self, speed_reference, speed_current): 
         
         # Hint: Integral control with anti windup(there are upper bound and lower bound for the integrator.)
-        # if self.integrator >= self.integrator_max:
-        #     self.integrator = self.integrator_max
-        # if self.integrator <= self.integrator_min:
-        #     self.integrator = self.integrator_min
+        if self.integrator >= self.integrator_max:
+            self.integrator = self.integrator_max
+        if self.integrator <= self.integrator_min:
+            self.integrator = self.integrator_min
 
-        acc = TODO
+        acc = self.kp*(speed_reference-speed_current) + self.ki*self.integrator + self.kd*self.derivator
         return acc
 
 # =====================================end of the controller====================================#
@@ -101,7 +101,7 @@ def controller():
 
     # Initialize the PID controller
     # =====================================tune the gains for PID controller=================================#    
-    PID_control = PID(kp=TODO, ki=TODO, kd=TODO)
+    PID_control = PID(kp=1, ki=1, kd=1)
     # =======================================================================================================#
     
     while not rospy.is_shutdown():
